@@ -1,0 +1,17 @@
+# Python
+__pycache__/
+*.pyc
+
+# Environment Variables (Secrets)
+.env
+
+# Data (Downloaded automatically by preprocess.py)
+raw_data/
+data/
+
+# OS Files
+.DS_Store
+
+# Virtual Environment
+venv/
+env/

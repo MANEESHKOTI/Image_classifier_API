@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "${API_PORT}:${API_PORT}" # Expose the API port
+    env_file:
+      - .env # Load environment variables
+    volumes:
+      - ./model:/app/model # Mount the model directory
+      - ./results:/app/results # Mount the results directory
+    healthcheck:
+      # A simple health check that curls the API's health endpoint
+      # Note: curl must be installed in the Docker image (python-slim has it usually, or we assume it)
+      test: ["CMD", "curl", "-f", "http://localhost:${API_PORT}/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s # Give the container time to start
